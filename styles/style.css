@@ -1,5 +1,17 @@
-body {
-  font-family: Arial, sans-serif;
+/* Título principal com Montserrat */
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Títulos dos filmes com Lora */
+.movie-card h3 {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 header {
@@ -36,4 +48,95 @@ header {
 
 .movie-card img {
   width: 100%;
+}
+
+/* Estilos do botão de light/dark mode */
+.toggle {
+  width: 50px;
+  height: 25px;
+  background-color: #ddd; /* Cor do fundo do botão */
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Para espaçar os ícones */
+  position: relative;
+  padding: 0 5px;
+  cursor: pointer;
+  margin-left: auto; /* Adiciona margem à esquerda para empurrar o botão para a direita */
+}
+
+.toggle-icon {
+  color: #f1c40f; /* Cor dos ícones */
+  font-size: 14px;
+  display: block; /* Exibe ambos os ícones */
+}
+
+.toggle-ball {
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff; /* Cor da bola */
+  position: absolute;
+  left: 5px; /* Posicionar no início do toggle */
+  border-radius: 50%;
+  transition: all 0.3s ease; /* Transição suave */
+}
+
+/* Quando o modo escuro estiver ativo, mover a bola para o outro lado */
+.dark-mode .toggle-ball {
+  background-color: #333;
+  left: calc(100% - 25px); /* Move a bola para a direita */
+}
+
+/* Esconder o ícone da lua em modo claro e o ícone do sol em modo escuro */
+.dark-mode .toggle-icon.fa-moon {
+  display: block; /* Mostra o ícone da lua no modo escuro */
+}
+
+.dark-mode .toggle-icon.fa-sun {
+  display: none; /* Esconde o ícone do sol no modo escuro */
+}
+
+/* Estilos para dark mode */
+.dark-mode body {
+  background-color: #121212; /* Cor de fundo escura */
+  color: #ffffff; /* Cor do texto em geral */
+}
+
+.dark-mode header {
+  background-color: #1e1e1e; /* Cor do cabeçalho em modo escuro */
+}
+
+.dark-mode h1 {
+  color: #ffffff; /* Cor do título em modo escuro */
+}
+
+.dark-mode input {
+  background-color: #333; /* Cor de fundo do input em modo escuro */
+  color: white; /* Cor do texto no input */
+}
+
+.dark-mode button {
+  background-color: #333; /* Cor de fundo do botão em modo escuro */
+  color: white; /* Cor do texto no botão */
+}
+
+.dark-mode .movie-card {
+  background-color: #333; /* Cor de fundo dos cards dos filmes em modo escuro */
+  color: white; /* Cor do texto nos cards dos filmes */
+}
+
+/* Adicionando cores ao texto nos cards */
+.dark-mode .movie-card h3 {
+  color: white; /* Cor do título do filme em modo escuro */
+}
+
+/* Estilo adicional para garantir que todo o fundo é escuro */
+.dark-mode {
+  background-color: #121212; /* Cor de fundo escura */
+  color: #ffffff; /* Cor do texto em geral */
+}
+
+/* Para garantir que o conteúdo fica escuro */
+.dark-mode section {
+  background-color: #121212; /* Cor de fundo da seção que contém os filmes */
 }

@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Movie/TV Show Search Tool</title>
         <link rel="stylesheet" href="../styles/style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
         <script src="../src/config.js"></script>
         <script src="../src/main.js"></script>
     </head>
@@ -13,10 +15,14 @@
             <h1>Movie/TV Show Search Tool</h1>
             <input type="text" id="searchInput" placeholder="Type a movie name..." />
             <button id="searchBtn">Search</button>
+            <div class="toggle">
+                <i class="fas fa-moon toggle-icon"></i>
+                <i class="fas fa-sun toggle-icon"></i>
+                <div class="toggle-ball"></div>
+            </div>
         </header>
 
         <section id="movieResults"></section>
-
         
     </body>
 </html>
