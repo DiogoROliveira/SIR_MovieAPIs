@@ -1,0 +1,168 @@
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+
+  #movieDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+
+  #movieDetails img {
+    width: 300px;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  
+  
+  #movieDetails h1 {
+    font-size: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+  }
+  
+ 
+  #movieDetails p {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    text-align: justify;
+    max-width: 800px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  
+  #movieDetails .info {
+    font-size: 16px;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .toggle {
+    width: 50px;
+    height: 25px;
+    background-color: #ddd; 
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    position: relative;
+    padding: 0 5px;
+    cursor: pointer;
+    margin-left: auto; 
+  }
+  
+  .toggle-icon {
+    color: #f1c40f; 
+    font-size: 14px;
+    display: block; 
+  }
+  
+  .toggle-ball {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff; 
+    position: absolute;
+    left: 5px; 
+    border-radius: 50%;
+    transition: all 0.3s ease; 
+  }
+  
+  
+  .dark-mode .toggle-ball {
+    background-color: #333;
+    left: calc(100% - 25px); 
+  }
+  
+  
+  .dark-mode .toggle-icon.fa-moon {
+    display: block; 
+  }
+  
+  .dark-mode .toggle-icon.fa-sun {
+    display: none;
+  }
+  
+ 
+  .dark-mode body {
+    background-color: #121212; 
+    color: #ffffff; 
+  }
+  
+  .dark-mode header {
+    background-color: #1e1e1e; 
+  }
+  
+  .dark-mode h1 {
+    color: #ffffff; 
+  }
+  
+  .dark-mode input {
+    background-color: #333; 
+    color: white; 
+  }
+  
+  .dark-mode button {
+    background-color: #333; 
+    color: white; 
+  }
+  
+  .dark-mode .movie-card {
+    background-color: #333; 
+    color: white; 
+  }
+  
+  
+  .dark-mode .movie-card h3 {
+    color: white; 
+  }
+  
+  
+  .dark-mode {
+    background-color: #121212; 
+    color: #ffffff;
+  }
+  
+  
+  .dark-mode section {
+    background-color: #121212;
+  }
+  
+  .dark-mode #movieDetails h1 {
+    color: #ffffff; /* Texto do título em branco no dark mode */
+  }
+
+  .dark-mode #movieDetails p {
+    color: #dddddd; /* Texto da sinopse e informações em cor clara no dark mode */
+  }
+
+  .dark-mode #movieDetails .info {
+    color: #dddddd; /* Informação adicional em cor clara no dark mode */
+  }
+
+  
+  @media (max-width: 768px) {
+    #movieDetails img {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    #movieDetails p {
+      padding: 0 10px;
+    }
+  }
+  

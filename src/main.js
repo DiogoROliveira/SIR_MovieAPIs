@@ -8,15 +8,30 @@ const TMDB_API_KEY = myconfig.MY_KEY;
 // number of movies to display
 const NUMBER_OF_MOVIES = 40;
 
-
+// handles search 
 document.getElementById("searchBtn").addEventListener("click", getMovies, false);
+document.getElementById("searchInput").addEventListener("keydown", (e) => {
+    if(e.key === "Enter") getMovies();
+});
 
 // Adicionei um event listener para o botão de mudar light e dark mode
 const toggle = document.querySelector(".toggle");
 const body = document.body;
 
-toggle.addEventListener("click", function() {
-    body.classList.toggle("dark-mode"); // muda a clase de body para dark-mode
+// check if dark mode is enabled in local storage
+if (localStorage.getItem('darkMode') === 'enabled') {
+    body.classList.add('dark-mode');
+}
+
+toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    // save dark mode status in local storage
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        localStorage.setItem('darkMode', 'disabled');
+    }
 });
 
 
@@ -57,6 +72,11 @@ function showMovies(data) {
         const img = document.createElement('img');
         img.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
         img.alt = movie.title;
+
+        movieCard.addEventListener('click', () => {
+            window.location.href = `/public/movie.html?id=${movie.id}`;
+        });
+
         movieCard.appendChild(img);
 
         // Adicionar título do filme
