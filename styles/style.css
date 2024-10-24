@@ -14,40 +14,154 @@ h1 {
   font-size: 18px;
 }
 
-header {
-  text-align: center;
-  margin: 20px;
+.navbar {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  position: sticky;
+  top: 0;
 }
 
-#searchInput {
-  width: 300px;
-  padding: 10px;
+.navbar-container {
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  height: 100%;
+  color: white;
+  font-family: "Sen", sans-serif;
+}
+
+.logo-container {
+  flex: 1;
+}
+
+.logo {
+  font-size: 15px;
+  color: #4dbf00;
+}
+
+.menu-container {
+  flex: 6;
+}
+
+.menu-list {
+  display: flex;
+  list-style: none;
+}
+
+.menu-list-item {
+  margin-right: 30px;
+}
+
+.menu-list-item.active {
+  font-weight: bold;
+}
+
+.search-container {
+  position: relative; /* Para posicionar os ícones dentro do campo de texto */
+}
+
+.search-input {
+  width: 150px; /* Largura menor */
+  padding: 10px 40px 10px 30px; /* Ajuste o padding para dar espaço para os ícones */
   font-size: 16px;
+  border-radius: 25px; /* Bordas arredondadas */
+  border: 1px solid #ccc; /* Borda do campo de texto */
+  transition: width 0.3s ease; /* Transição suave ao expandir */
+  display: none; /* Inicialmente oculto */
+}
+
+.search-input.expanded {
+  display: block; /* Mostra o campo de texto quando expandido */
+  width: 200px; /* Largura expandida */
+}
+
+/* Estilos para o botão de fechar */
+#closeBtn {
+  position: absolute; /* Posiciona o ícone de fechar dentro do campo */
+  left: 10px; /* Ajuste a posição à esquerda */
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Ajusta para centralizar */
+  color: #333; /* Cor do ícone */
+  display: none; /* Inicialmente oculto */
+}
+
+#searchIcon, #closeBtn, #searchBtn {
+  color: #676767; /* Cor dos ícones */
 }
 
 #searchBtn {
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
+  position: absolute; /* Posiciona o ícone de busca dentro do campo */
+  right: 10px; /* Ajuste a posição para a direita */
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Ajusta para centralizar */
+  display: none; /* Inicialmente oculto */
 }
 
+/* Container geral para os resultados dos filmes */
 #movieResults {
+  padding: 0 20px; /* Espaçamento nas laterais (esquerda e direita) */
+  max-width: 1200px; /* Define uma largura máxima para o conteúdo */
+  margin: 0 auto; /* Centraliza o conteúdo na página */
+}
+
+/* Estilo para os itens da lista de filmes */
+.movie-item {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: flex-start;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc; /* Linha separadora entre os filmes */
 }
 
-.movie-card {
-  border: 1px solid #ccc;
-  margin: 10px;
-  padding: 10px;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
+/* Estilo do poster */
+.movie-item img {
+  width: 150px; /* Tamanho do poster */
+  margin-right: 20px;
 }
 
-.movie-card img {
-  width: 100%;
+/* Estilo dos detalhes do filme */
+.movie-details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo dos titulos dos filmes */
+.movie-details h3 {
+  font-size: 1.5em;
+  margin: 0;
+  color: #333;
+}
+
+/* Estilo das descrições dos filmes */
+.movie-details p {
+  margin: 10px 0 0 0;
+  font-size: 1em;
+  color: #666;
+}
+
+/* Ajustes de layout para dispositivos menores */
+@media (max-width: 768px) {
+  #movieResults {
+      padding: 0 10px; /* Reduz o espaçamento lateral em telas menores */
+  }
+
+  .movie-item {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .movie-item img {
+      margin-bottom: 10px;
+  }
+}
+
+.no-poster {
+  width: 150px; /* Definir tamanho específico para o placeholder */
+  height: 225px;
+  object-fit: contain; /* Ajusta a imagem no espaço sem distorcer */
+  background-color: #f0f0f0; /* Cor de fundo diferenciada */
+  border: 1px solid #ccc; /* Borda para destacar o placeholder */
 }
 
 /* Estilos do botão de light/dark mode */
@@ -139,4 +253,20 @@ header {
 /* Para garantir que o conteúdo fica escuro */
 .dark-mode section {
   background-color: #121212; /* Cor de fundo da seção que contém os filmes */
+}
+
+/* Modo escuro: muda a cor dos ícones */
+.dark-mode #closeBtn,
+.dark-mode #searchIcon,
+.dark-mode #searchBtn {
+    color: #f1c40f; /* Cor dos ícones no modo escuro */
+}
+
+.dark-mode .search-input {
+    background-color: #333; /* Cor de fundo do campo de texto em modo escuro */
+    color: #fff; /* Cor do texto no campo de texto */
+}
+
+.dark-mode .search-input::placeholder {
+    color: #aaa; /* Cor do placeholder em modo escuro */
 }

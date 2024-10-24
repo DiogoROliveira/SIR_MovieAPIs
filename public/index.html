@@ -11,16 +11,34 @@
         <script src="../src/main.js"></script>
     </head>
     <body>
-        <header>
-            <h1>Movie/TV Show Search Tool</h1>
-            <input type="text" id="searchInput" placeholder="Type a movie name..." />
-            <button id="searchBtn">Search</button>
-            <div class="toggle">
-                <i class="fas fa-moon toggle-icon"></i>
-                <i class="fas fa-sun toggle-icon"></i>
-                <div class="toggle-ball"></div>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="logo-container">
+                    <h1 class="logo">Movie/TV Show Search Tool</h1>
+                </div>
+                <div class="menu-container">
+                    <ul class="menu-list">
+                        <li class="menu-list-item active">Home</li>
+                        <li class="menu-list-item">Movies</li>
+                        <li class="menu-list-item">Series</li>
+                        <li class="menu-list-item">Popular</li>
+                        <li class="menu-list-item">Trends</li>
+    
+                    </ul>
+                </div>
+                <div class="search-container">
+                    <i id="searchIcon" class="fas fa-search" style="cursor: pointer;"></i> <!-- Ícone da lupa -->
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search for movies..." style="display: none;"> <!-- Inicialmente oculto -->
+                    <i id="closeBtn" class="fas fa-times" style="display: none; cursor: pointer;"></i> <!-- Ícone de fechar -->
+                    <i id="searchBtn" class="fas fa-search" style="display: none; cursor: pointer;"></i> <!-- Novo ícone de busca -->
+                </div>
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
             </div>
-        </header>
+        </div>
 
         <section id="movieResults"></section>
         

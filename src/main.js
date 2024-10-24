@@ -8,12 +8,53 @@ const TMDB_API_KEY = myconfig.MY_KEY;
 // number of movies to display
 const NUMBER_OF_MOVIES = 40;
 
+const searchIcon = document.getElementById('searchIcon'); // ID do ícone de busca
+const searchInput = document.getElementById('searchInput'); // ID do campo de texto
+const searchBtn = document.getElementById('searchBtn'); // ID do novo ícone de busca
+const closeBtn = document.getElementById('closeBtn'); // ID do botão de fechar
 
-document.getElementById("searchBtn").addEventListener("click", getMovies, false);
+// Evento para mostrar e expandir o campo de texto ao clicar no ícone
+searchIcon.addEventListener('click', function() {
+    searchInput.style.display = 'block'; // Mostra o campo de texto
+    searchInput.classList.toggle('expanded'); // Expande ou contrai
+    searchInput.focus(); // Foca no campo de texto
+    searchIcon.style.display = 'none'; // Oculta o ícone da lupa
+    closeBtn.style.display = 'block'; // Mostra o ícone de fechar à esquerda
+    searchBtn.style.display = 'block'; // Mostra o ícone de busca à direita
+});
+
+// Evento para buscar filmes quando o usuário pressiona Enter ou clica no ícone
+searchInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        const query = searchInput.value; // Obtém o valor do campo de texto
+        console.log('Searching for:', query); // Log para depuração (opcional)
+        getMovies(query); // Chama a função de busca passando a consulta
+    }
+});
+
+searchBtn.addEventListener('click', function() {
+    const query = searchInput.value; // Obtém o valor do campo de texto
+    console.log('Searching for:', query); // Log para depuração (opcional)
+    getMovies(query); // Chama a função de busca passando a consulta
+});
+
+// Evento para fechar o campo de texto ao clicar no ícone "X"
+closeBtn.addEventListener('click', function() {
+    searchInput.value = ''; // Limpa o campo de texto
+    searchInput.style.display = 'none'; // Oculta o campo de texto
+    searchIcon.style.display = 'block'; // Mostra o ícone da lupa novamente
+    closeBtn.style.display = 'none'; // Oculta o ícone de fechar
+    searchBtn.style.display = 'none'; // Oculta o ícone de busca
+});
 
 // Adicionei um event listener para o botão de mudar light e dark mode
 const toggle = document.querySelector(".toggle");
 const body = document.body;
+
+// check if dark mode is enabled in local storage
+if (localStorage.getItem('darkMode') === 'enabled') {
+    body.classList.add('dark-mode');
+}
 
 toggle.addEventListener("click", function() {
     body.classList.toggle("dark-mode"); // muda a clase de body para dark-mode
@@ -48,25 +89,52 @@ function showMovies(data) {
         return;
     }
 
-    // Loop através dos resultados e criar elementos para cada filme
+    // Loop pelos filmes e criar a estrutura de lista para cada filme
     data.results.forEach(movie => {
-        const movieCard = document.createElement('div');
-        movieCard.classList.add('movie-card');
+        const movieItem = document.createElement('div');
+        movieItem.classList.add('movie-item'); // Classe para estilo da lista
 
-        // Adicionar imagem do filme
+        // Poster do filme (usar imagem padrão se não houver poster)
         const img = document.createElement('img');
-        img.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+        if (movie.poster_path) {
+            // Se houver poster, usa a imagem do TMDB
+            img.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+        } else {
+            // Se não houver poster, usa a imagem placeholder especificada
+            img.src = 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
+            img.classList.add('no-poster');  // Adiciona uma classe para um estilo específico
+        }
         img.alt = movie.title;
-        movieCard.appendChild(img);
+        movieItem.appendChild(img);
 
-        // Adicionar título do filme
+        movieItem.addEventListener('click', () => {
+            window.location.href = `/public/movie.html?id=${movie.id}`;
+        });
+
+        // Detalhes do filme (título e descrição)
+        const movieDetails = document.createElement('div');
+        movieDetails.classList.add('movie-details'); // Classe para os detalhes do filme
+
         const title = document.createElement('h3');
         title.textContent = movie.title;
-        movieCard.appendChild(title);
+        movieDetails.appendChild(title);
 
-        // Adicionar o card à seção de resultados
-        movieResults.appendChild(movieCard);
+        // Descrição (usar mensagem padrão se não houver descrição)
+        const description = document.createElement('p');
+        description.textContent = movie.overview || 'No description available.';
+        movieDetails.appendChild(description);
+
+        // Adiciona os detalhes e a imagem ao item da lista
+        movieItem.appendChild(movieDetails);
+
+        // Linha de separação
+        const separator = document.createElement('hr');
+        movieItem.appendChild(separator);
+
+        // Adiciona o item completo na seção de resultados
+        movieResults.appendChild(movieItem);
     });
 }
+
 
 });
