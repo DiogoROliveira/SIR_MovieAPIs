@@ -8,6 +8,7 @@ const TMDB_API_KEY = myconfig.MY_KEY;
 // number of movies to display
 const NUMBER_OF_MOVIES = 40;
 
+
 const searchIcon = document.getElementById('searchIcon'); // ID do ícone de busca
 const searchInput = document.getElementById('searchInput'); // ID do campo de texto
 const searchBtn = document.getElementById('searchBtn'); // ID do novo ícone de busca
@@ -56,8 +57,16 @@ if (localStorage.getItem('darkMode') === 'enabled') {
     body.classList.add('dark-mode');
 }
 
-toggle.addEventListener("click", function() {
-    body.classList.toggle("dark-mode"); // muda a clase de body para dark-mode
+
+toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    // save dark mode status in local storage
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        localStorage.setItem('darkMode', 'disabled');
+    }
 });
 
 
@@ -105,6 +114,7 @@ function showMovies(data) {
             img.classList.add('no-poster');  // Adiciona uma classe para um estilo específico
         }
         img.alt = movie.title;
+      
         movieItem.appendChild(img);
 
         movieItem.addEventListener('click', () => {
@@ -114,6 +124,7 @@ function showMovies(data) {
         // Detalhes do filme (título e descrição)
         const movieDetails = document.createElement('div');
         movieDetails.classList.add('movie-details'); // Classe para os detalhes do filme
+
 
         const title = document.createElement('h3');
         title.textContent = movie.title;
