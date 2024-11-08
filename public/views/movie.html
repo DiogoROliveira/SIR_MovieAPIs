@@ -81,14 +81,9 @@
         }
 
         function getMovies(query) {
-            window.location.href = `/public/views/search.html?query=${encodeURIComponent(query)}`;
+            window.location.href = `/public/views/search.html?query=${encodeURIComponent(query)}&page=1`;
         }
     </script>
-
-    <header>
-        <h1>Movie Details</h1>
-        <button id="backBtn">Back</button>
-    </header>
 
     <div id="movieDetails">
         <!-- Movie details generated dynamically -->

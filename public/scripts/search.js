@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function showMovies(data, query) {
         movieResults.innerHTML = '';
     
-        // Título "Showing results for..."
+        // show results for query text
         const title = document.createElement('h2');
         title.textContent = `Showing results for "${query}"`;
         title.style.marginBottom = '20px';
@@ -26,9 +26,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     
         data.results.forEach(movie => {
+            // create movie card
             const movieItem = document.createElement('div');
             movieItem.classList.add('movie-card');
     
+            // get movie poster
             const img = document.createElement('img');
             img.src = movie.poster_path
                       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -39,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const movieDetails = document.createElement('div');
             movieDetails.classList.add('movie-details');
     
+            // clickable title and image
             const title = document.createElement('h3');
             const titleLink = document.createElement('a');
             titleLink.href = `javascript:navigateToMovieDetails(${movie.id}, "${query}", ${data.page})`;
@@ -48,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
             titleLink.textContent = movie.title;
             title.appendChild(titleLink);
     
-            // Adiciona o ano ao lado do título
+            // adds year of release
             const year = document.createElement('span');
             year.classList.add('movie-year');
             year.textContent = ` ${new Date(movie.release_date).getFullYear()}`;
@@ -56,10 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
     
             movieDetails.appendChild(title);
     
+            // adds description
             const description = document.createElement('p');
             description.textContent = movie.overview || 'No description available.';
             movieDetails.appendChild(description);
     
+            // adds rating
             const rating = document.createElement('p');
             rating.classList.add('movie-director');
             rating.textContent = 'Avg rating: ';
@@ -71,40 +76,72 @@ document.addEventListener("DOMContentLoaded", function() {
             movieItem.appendChild(movieDetails);
             movieResults.appendChild(movieItem);
     
-            // Adiciona um separador entre os resultados
+            // add break line
             const separator = document.createElement('hr');
             separator.classList.add('separator');
             movieResults.appendChild(separator);
         });
     
-        // Exibe a paginação
+        // pagination call
         showPagination(data);
     }
     
     function showPagination(data) {
-
         const paginationContainer = document.getElementById("pagination");
-    
-    
         paginationContainer.innerHTML = '';
     
-        // Adiciona as páginas
-        for (let i = 1; i <= data.total_pages; i++) {
+        const totalPages = data.total_pages;
+        const currentPage = data.page;
+        const maxVisiblePages = 5;  
+    
+        // create button function
+        function createPageButton(page, isActive = false) {
             const pageButton = document.createElement('button');
-            pageButton.textContent = i;
+            pageButton.textContent = page;
             pageButton.classList.add('pagination-button');
-            
-            // Verifica se é a página atual e adiciona uma classe diferente
-            if (i === data.page) {
+            if (isActive) {
                 pageButton.classList.add('active');
             }
-    
-            // Adiciona o evento de click para carregar os filmes da página
-            pageButton.addEventListener('click', () => {
-                getMovies(query, i);
-            });
-    
+            pageButton.addEventListener('click', () => goToPage(page, query));
             paginationContainer.appendChild(pageButton);
+        }
+    
+        // creates 1st page button
+        createPageButton(1, currentPage === 1);
+    
+        // sets interval between pages and adds buttons for them
+        let startPage = Math.max(2, currentPage - 1);
+        let endPage = Math.min(totalPages - 1, currentPage + 1);
+    
+        // shows 
+        if (currentPage <= 2) {
+            endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 2);
+        } else if (currentPage >= totalPages - 1) {
+            startPage = Math.max(2, endPage - maxVisiblePages + 2);
+        }
+    
+        // add "..." if there is a gap between the start page and the first page
+        if (startPage > 2) {
+            const dots = document.createElement('span');
+            dots.textContent = '...';
+            paginationContainer.appendChild(dots);
+        }
+    
+        // adds buttons to the pages available
+        for (let i = startPage; i <= endPage; i++) {
+            createPageButton(i, i === currentPage);
+        }
+    
+        // add "..." if there is a gap between the last page and the end page
+        if (endPage < totalPages - 1) {
+            const dots = document.createElement('span');
+            dots.textContent = '...';
+            paginationContainer.appendChild(dots);
+        }
+    
+        // add last page
+        if (totalPages > 1) {
+            createPageButton(totalPages, currentPage === totalPages);
         }
     }
     
@@ -119,12 +156,13 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch((error) => { console.log("Error fetching data: ", error); });
     }
         
-    
+
+    function goToPage(page, query) {
+        window.location.href = `/public/views/search.html?query=${encodeURIComponent(query)}&page=${page}`;
+    }
 });
 
-function goToPage(page, query) {
-    window.location.href = `/public/views/search.html?query=${encodeURIComponent(query)}&page=${page}`;
-}
+
 
 function navigateToMovieDetails(movieId, query, page) {
     window.location.href = `/public/views/movie.html?id=${movieId}&query=${encodeURIComponent(query)}&page=${page}`;
