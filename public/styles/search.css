@@ -1,0 +1,144 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 20px;
+}
+
+#movieResults h2 {
+  color: #b3b3b3;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Estilos do card de filme */
+.movie-card {
+  display: flex;
+  gap: 15px;
+  padding: 10px 10px;
+  color: white;
+  align-items: flex-start; /* Alinha o topo da imagem e do título */
+  border-left: 5px solid transparent;
+  min-height: 250px; /* Garante uma altura mínima */
+  flex-wrap: wrap; /* Permite que o conteúdo se ajuste em várias linhas se necessário */
+}
+
+.movie-card img {
+  width: 150px;
+  height: 225px; /* Definindo altura fixa para manter a consistência */
+  border-radius: 10px;
+  transition: border 0.05s ease-in-out;
+}
+
+.movie-card img:hover {
+  border: 3px solid #4dbf00; /* Borda verde no hover */
+}
+
+.movie-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espaça corretamente os elementos dentro da card */
+  height: 225px; /* Garante que a descrição se ajuste ao tamanho da imagem */
+  overflow: hidden; /* Impede que o conteúdo ultrapasse o limite */
+}
+
+.movie-details h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #4dbf00;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem; /* Menor margem para otimizar o espaço */
+}
+
+.movie-details h3 a {
+  text-decoration: none;
+  color: #4dbf00;
+  transition: color 0.3s ease-in-out;
+}
+
+.movie-details h3 a:hover {
+  color: #8ce639;
+}
+
+/* Estilo do ano */
+.movie-year {
+  font-size: 1.3rem;
+  color: #999;
+  margin-left: 10px;
+}
+
+/* Estilos da descrição */
+.movie-details p {
+  margin-right: 10px;
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-bottom: auto; /* Faz a descrição ocupar o espaço restante */
+  overflow: hidden; /* Impede o transbordamento */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita o número de linhas visíveis para 3 */
+  -webkit-box-orient: vertical; /* Define a orientação das linhas como vertical */
+  text-overflow: ellipsis; /* Adiciona "..." ao final de textos longos */
+  white-space: normal; /* Permite que o texto quebre em várias linhas */
+}
+
+.movie-details p.long-description {
+  overflow: auto; /* Permite rolar a descrição se for muito longa */
+  max-height: 5.4rem; /* Limite de altura para a rolagem */
+}
+
+.movie-card.expanded .movie-details p {
+  white-space: normal;
+  overflow: visible;
+}
+
+/* Estilos do nome do diretor */
+.movie-director {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #000;
+}
+
+/* Separador */
+.separator {
+  border: none;
+  border-bottom: 1px solid #444;
+  margin: 15px 0;
+}
+
+
+.no-poster {
+  width: 150px; /* Definir tamanho específico para o placeholder */
+  height: 225px;
+  object-fit: contain; /* Ajusta a imagem no espaço sem distorcer */
+  background-color: #f0f0f0; /* Cor de fundo diferenciada */
+  border: 1px solid #ccc; /* Borda para destacar o placeholder */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 2rem;
+  
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  background-color: #4dbf00;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.pagination-button:hover {
+  background-color: #3a9e00;
+}
+
+.pagination-button.active {
+  background-color: #2f7a00;
+}
