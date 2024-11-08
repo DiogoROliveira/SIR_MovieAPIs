@@ -13,6 +13,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/css/darkmode.css">
+    <link rel="stylesheet" href="../styles/index.css">
     
 </head>
 <body>
@@ -20,30 +21,24 @@
     <!-- Incluindo o cabeçalho com a barra de navegação -->
     <div id="navbar-placeholder"></div>
 
-    <main>
-        <!-- Conteúdo da página -->
-    </main>
-
     <script>
-        // Inserindo o conteúdo do header em #navbar-placeholder
         fetch('../assets/partials/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
-                // Agora o navbar foi inserido, podemos executar o script do navbar
                 initializeNavbar();
             })
             .catch(error => {
                 console.error('Error fetching header:', error);
             });
-    
-        // Função para inicializar os comportamentos do navbar
+
+        
         function initializeNavbar() {
             const toggle = document.querySelector('.toggle');
             const toggleIconMoon = document.querySelector('.fas.fa-moon');
             const toggleIconSun = document.querySelector('.fas.fa-sun');
     
-            // Carregar a preferência de dark mode do localStorage
+            // load localStorage prefs
             const darkModePreference = localStorage.getItem('darkMode');
             if (darkModePreference === 'enabled') {
                 document.body.classList.add('dark-mode');
@@ -51,11 +46,11 @@
                 toggleIconSun.classList.remove('hidden');
             }
     
-            // Alternar entre dark mode e light mode
+            // darkmode toggle
             toggle.addEventListener('click', function() {
                 document.body.classList.toggle('dark-mode');
                 
-                // Salvar a preferência no localStorage
+                // store preference in localStorage
                 if (document.body.classList.contains('dark-mode')) {
                     localStorage.setItem('darkMode', 'enabled');
                     toggleIconMoon.classList.add('hidden');
@@ -82,7 +77,6 @@
                 }
             });
 
-            
             searchInput.addEventListener("keydown", (e) => {
                 if(e.key === "Enter") getMovies(searchInput.value);
             });
@@ -93,11 +87,44 @@
         }
     </script>
 
-    <!-- Scripts (Bootstrap e outros) -->
+<main>
+    <!-- Mensagem de boas-vindas -->
+    <section class="container text-center my-5">
+        <h1>Welcome to Movie Finder</h1>
+        <p>Search for your favorite movies by title.</p>
+    </section>
+
+    <!-- Categorias ou recursos populares -->
+    <section class="container text-center mb-5">
+        <h3>Explore</h3>
+
+        <!-- Popular Movies -->
+        <div class="category-section">
+            <span class="category-label">Popular This Week</span>
+            <div id="popularMovies" class="movie-row"></div>
+        </div>
+
+        <!-- Upcoming Movies -->
+        <div class="category-section">
+            <span class="category-label">Upcoming Movies</span>
+            <div id="upcomingMovies" class="movie-row"></div>
+        </div>
+
+        <!-- Top Rated Movies with View More -->
+        <div class="category-section" id="topRatedMovies-container">
+            <span class="category-label">Top Rated</span>
+            <div id="topRatedMovies" class="movie-row"></div>
+            <a href="toprated.html" class="view-more">View More →</a>
+        </div>
+    </section>
+</main>
+
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script type="javascript" src="../scripts/config.js"></script>
-    <script type="javascript" src="../scripts/main.js"></script>
+    <script src="../scripts/config.js"></script>
+    <script src="../scripts/main.js"></script>
 </body>
 </html>

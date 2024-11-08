@@ -1,0 +1,58 @@
+/* Container das categorias */
+.category-section {
+    margin-bottom: 50px;
+}
+
+/* Label da categoria centralizada */
+.category-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
+}
+
+/* Linha de filmes */
+.movie-row {
+    display: flex;
+    justify-content: space-around; /* Espaçamento entre os cards */
+    gap: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Card do poster do filme */
+.movie-poster {
+    width: 175px;
+    height: 250px;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.movie-poster img:hover {
+    transform: scale(1.05);
+}
+
+/* Link View More para alinhar à direita na seção "Top Rated" */
+#topRatedMovies-container {
+    position: relative;
+}
+
+.view-more {
+    position: absolute;
+    translate: 0 50%;
+    top: 0;
+    right: 10px;
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: underline;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}
