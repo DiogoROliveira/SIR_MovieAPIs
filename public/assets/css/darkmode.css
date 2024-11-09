@@ -105,9 +105,14 @@
       color: #aaa; /* Cor do placeholder em modo escuro */
   }
 
-  .hidden {
-    display: none;
-}
+  .dark-mode a {
+    color: #ffffff;
+  }
+
+  .dark-mode .movie-details p {
+    color: #ddd;
+  }
+
 
 
 /* Barra de Pesquisa Oculta Inicialmente */
@@ -129,4 +134,11 @@
 #searchIcon {
   color: #676767;
   cursor: pointer;
+}
+
+
+/* Movie Details Styles in dark mode */
+
+.dark-mode #movieDetails h1 {
+    color: #ffffff;
 }

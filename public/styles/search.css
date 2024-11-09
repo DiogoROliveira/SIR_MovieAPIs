@@ -6,7 +6,7 @@
 }
 
 #movieResults h2 {
-  color: #b3b3b3;
+  color: gray;
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
@@ -16,7 +16,7 @@
   display: flex;
   gap: 15px;
   padding: 10px 10px;
-  color: white;
+  color: gray;
   align-items: flex-start; /* Alinha o topo da imagem e do título */
   border-left: 5px solid transparent;
   min-height: 250px; /* Garante uma altura mínima */
@@ -73,7 +73,7 @@
 .movie-details p {
   margin-right: 10px;
   font-size: 0.9rem;
-  color: #ddd;
+  color: #000;
   margin-bottom: auto; /* Faz a descrição ocupar o espaço restante */
   overflow: hidden; /* Impede o transbordamento */
   display: -webkit-box;
