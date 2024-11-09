@@ -64,14 +64,14 @@ document.addEventListener("DOMContentLoaded", function() {
             description.textContent = movie.overview || 'No description available.';
             movieDetails.appendChild(description);
     
-            // adds rating
-            const rating = document.createElement('p');
-            rating.classList.add('movie-director');
-            rating.textContent = 'Avg rating: ';
-            const movieRating = document.createElement('span');
-            movieRating.textContent = movie.vote_average.toFixed(1) + '/10' || 'Unknown';
-            rating.appendChild(movieRating);
-            movieDetails.appendChild(rating);
+            // adds orginal title
+            const ogTitle = document.createElement('p');
+            ogTitle.classList.add('movie-director');
+            ogTitle.textContent = 'Original Title: ';
+            const ogTitleValue = document.createElement('span');
+            ogTitleValue.textContent = movie.original_title || 'Unknown';
+            ogTitle.appendChild(ogTitleValue);
+            movieDetails.appendChild(ogTitle);
     
             movieItem.appendChild(movieDetails);
             movieResults.appendChild(movieItem);

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     function displayMovieDetails(data) {
         // Update poster and backdrop
-        document.getElementById('poster').src = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+        document.getElementById('poster').src = `https://image.tmdb.org/t/p/original${data.poster_path}`;
         
         // Update content structure
         const detailsContainer = document.querySelector('.details-container');
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             <div class="movie-meta">
                 <strong>Release Date:</strong>
                 <span>${formatDate(data.release_date)}</span>
-                <strong>Rating:</strong>
-                <span>${data.vote_average.toFixed(1)}/10</span>
+                <strong>Original Title:</strong>
+                <span>${data.original_title}</span>
                 ${data.runtime ? `
                     <strong>Runtime:</strong>
                     <span>${formatRuntime(data.runtime)}</span>
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function updateBackdrop(backdropPath) {
         if (!backdropPath) return;
         const backdropContainer = document.getElementById('backdropContainer');
-        backdropContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w1280${backdropPath})`;
+        backdropContainer.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${backdropPath})`;
     }
 
     async function fetchMovieTrailer(query) {
@@ -216,11 +216,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         .filter(rating => rating.score > 0)
         .map(rating => rating.score);
 
-        // Calcula a média apenas com os scores válidos
+        // calculate avg rating
         const totalScore = validScores.reduce((acc, score) => acc + score, 0);
         const averageRating = validScores.length ? (totalScore / validScores.length).toFixed(1) : 'N/A';
 
-        // Adiciona cada rating à lista
+        // creates list item and adds each rating to list
         ratingsData.forEach(rating => {
             if (rating.score > 0 && rating.score) {
 
@@ -254,7 +254,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                         break;
                 }
 
-
                 const ratingItem = document.createElement('li');
                 ratingItem.classList.add('rating-item');
                 ratingItem.innerHTML = `<span class="rating-source">${rating.source}:</span> <span class="rating-score">${(rating.score / 10).toFixed(1)}</span>`;
@@ -262,7 +261,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
 
-        // Adiciona o item da média
+        // adds avg rating to list
         const averageItem = document.createElement('li');
         averageItem.classList.add('rating-item');
         averageItem.innerHTML = `<span class="rating-source">Average Rating:</span> <span class="rating-score">${(averageRating / 10).toFixed(1)}</span>`;
