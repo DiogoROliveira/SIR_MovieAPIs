@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const TMDB_API_KEY = myconfig.MY_KEY;
     const YT_KEY = myconfig.YT_KEY;
+    const RAPID_API_KEY = myconfig.RATING_KEY;
     let currentBackdropPath = null;
 
     const movieId = new URLSearchParams(window.location.search).get('id');
@@ -11,7 +12,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateBackdrop(currentBackdropPath);
         document.getElementById('watchTrailerBtn').addEventListener('click', () => fetchMovieTrailer(movieData.title));
 
-        fetchMovieCredits(movieId);
+        await fetchMovieCredits(movieId);
+        await fetchMovieRatings(movieData);
     }
 
     const observer = new MutationObserver((mutations) => {
@@ -166,5 +168,105 @@ document.addEventListener('DOMContentLoaded', async function() {
         creditsWrapper.appendChild(castContainer);
         creditsWrapper.appendChild(crewContainer);
         detailsContainer.appendChild(creditsWrapper);
+    }
+
+    async function fetchMovieRatings(movieData) {
+        const imdbId = movieData.imdb_id;
+
+            const url = `https://mdblist.p.rapidapi.com/?i=${imdbId}`;
+            console.log(url);
+            const options = {
+                method: 'GET',
+	            headers: {
+		            'x-rapidapi-key': RAPID_API_KEY,
+		            'x-rapidapi-host': 'mdblist.p.rapidapi.com'
+	            }
+            }
+        
+        try {
+            const response = await fetch(url, options);
+            const data = await response.text();
+
+            if(!data && response.status === 429){
+                throw new Error('Rate limit exceeded. Please try again later.');
+            }
+        
+            displayRatings(data);
+        } catch (error) {
+            console.error('Error fetching movie ratings:', error);
+        }
+    }
+
+    function displayRatings(data) {
+        const ratingsList = document.getElementById('ratingsList');
+        ratingsList.innerHTML = ''; 
+    
+        data = JSON.parse(data);
+
+        const ratingsData = data.ratings || [];
+
+        if (ratingsData.length === 0) {
+            const noRatingsMessage = document.createElement('p');
+            noRatingsMessage.textContent = 'No ratings found for this movie.';
+            ratingsList.appendChild(noRatingsMessage);
+            return;
+        }
+
+        const validScores = ratingsData
+        .filter(rating => rating.score > 0)
+        .map(rating => rating.score);
+
+        // Calcula a média apenas com os scores válidos
+        const totalScore = validScores.reduce((acc, score) => acc + score, 0);
+        const averageRating = validScores.length ? (totalScore / validScores.length).toFixed(1) : 'N/A';
+
+        // Adiciona cada rating à lista
+        ratingsData.forEach(rating => {
+            if (rating.score > 0 && rating.score) {
+
+                switch (rating.source) {
+                    case 'imdb':
+                        rating.source = 'IMDb';
+                        break;
+                    case 'tomatoes':
+                        rating.source = 'Rotten Tomatoes';
+                        break;
+                    case 'metacritic':
+                        rating.source = 'Metacritic';
+                        break;
+                    case 'metacriticuser':
+                        rating.source = 'Metacritic User';
+                        break;
+                    case 'tmdb':
+                        rating.source = 'TMDb';
+                        break;
+                    case 'tomatoesaudience':
+                        rating.source = 'Rotten Tomatoes Audience';
+                        break;
+                    case 'letterboxd':
+                        rating.source = 'Letterboxd';
+                        break;
+                    case 'trakt':
+                        rating.source = 'Trakt';
+                        break;
+                    default:
+                        rating.source = rating.source;
+                        break;
+                }
+
+
+                const ratingItem = document.createElement('li');
+                ratingItem.classList.add('rating-item');
+                ratingItem.innerHTML = `<span class="rating-source">${rating.source}:</span> <span class="rating-score">${(rating.score / 10).toFixed(1)}</span>`;
+                ratingsList.appendChild(ratingItem);
+            }
+        });
+
+        // Adiciona o item da média
+        const averageItem = document.createElement('li');
+        averageItem.classList.add('rating-item');
+        averageItem.innerHTML = `<span class="rating-source">Average Rating:</span> <span class="rating-score">${(averageRating / 10).toFixed(1)}</span>`;
+        ratingsList.appendChild(averageItem);
+       
     }
 });
