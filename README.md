@@ -6,7 +6,8 @@ Create a config.js file in the src directory that has the following structure:
 
 ```
 const myconfig = {
-  MY_KEY: "API_KEY"
+  MY_KEY: "API_KEY",
+  YT_KEY: "API_KEY",
 }
 ```
 
