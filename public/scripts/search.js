@@ -158,12 +158,12 @@ document.addEventListener("DOMContentLoaded", function() {
         
 
     function goToPage(page, query) {
-        window.location.href = `/public/views/search.html?query=${encodeURIComponent(query)}&page=${page}`;
+        window.location.href = `/search.html?query=${encodeURIComponent(query)}&page=${page}`;
     }
 });
 
 
 
 function navigateToMovieDetails(movieId, query, page) {
-    window.location.href = `/public/views/movie.html?id=${movieId}&query=${encodeURIComponent(query)}&page=${page}`;
+    window.location.href = `/movie.html?id=${movieId}&query=${encodeURIComponent(query)}&page=${page}`;
 }

@@ -1,9 +1,7 @@
-/* Container das categorias */
 .category-section {
     margin-bottom: 50px;
 }
 
-/* Label da categoria centralizada */
 .category-label {
     font-size: 1.5rem;
     font-weight: bold;
@@ -12,16 +10,14 @@
     text-align: left;
 }
 
-/* Linha de filmes */
 .movie-row {
     display: flex;
-    justify-content: space-around; /* Espaçamento entre os cards */
+    justify-content: space-around; 
     gap: 10px;
     margin-bottom: 15px;
     position: relative;
 }
 
-/* Card do poster do filme */
 .movie-poster {
     width: 175px;
     height: 250px;
@@ -38,7 +34,6 @@
     transform: scale(1.05);
 }
 
-/* Link View More para alinhar à direita na seção "Top Rated" */
 #topRatedMovies-container {
     position: relative;
 }

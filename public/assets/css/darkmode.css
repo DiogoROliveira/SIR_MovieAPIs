@@ -1,108 +1,108 @@
-/* Estilos do botão de light/dark mode */
+/* Toggle button styles */
 .toggle {
     width: 50px;
     height: 25px;
-    background-color: #ddd; /* Cor do fundo do botão */
+    background-color: #ddd; 
     border-radius: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Para espaçar os ícones */
+    justify-content: space-between; 
     position: relative;
     padding: 0 5px;
     cursor: pointer;
-    margin-left: auto; /* Adiciona margem à esquerda para empurrar o botão para a direita */
+    margin-left: auto; 
   }
   
   .toggle-icon {
-    color: #f1c40f; /* Cor dos ícones */
+    color: #f1c40f; 
     font-size: 14px;
-    display: block; /* Exibe ambos os ícones */
+    display: block; 
   }
   
   .toggle-ball {
     width: 20px;
     height: 20px;
-    background-color: #ffffff; /* Cor da bola */
+    background-color: #ffffff; 
     position: absolute;
-    left: 5px; /* Posicionar no início do toggle */
+    left: 5px; 
     border-radius: 50%;
-    transition: all 0.3s ease; /* Transição suave */
+    transition: all 0.3s ease; 
   }
   
-  /* Quando o modo escuro estiver ativo, mover a bola para o outro lado */
+  
   .dark-mode .toggle-ball {
     background-color: #333;
-    left: calc(100% - 25px); /* Move a bola para a direita */
+    left: calc(100% - 25px); 
   }
   
-  /* Esconder o ícone da lua em modo claro e o ícone do sol em modo escuro */
+  
   .dark-mode .toggle-icon.fa-moon {
-    display: block; /* Mostra o ícone da lua no modo escuro */
+    display: block; 
   }
   
   .dark-mode .toggle-icon.fa-sun {
-    display: none; /* Esconde o ícone do sol no modo escuro */
+    display: none; 
   }
   
-  /* Estilos para dark mode */
+  
   .dark-mode body {
-    background-color: #121212; /* Cor de fundo escura */
-    color: #ffffff; /* Cor do texto em geral */
+    background-color: #121212; 
+    color: #ffffff; 
   }
   
   .dark-mode header {
-    background-color: #1e1e1e; /* Cor do cabeçalho em modo escuro */
+    background-color: #1e1e1e; 
   }
   
   .dark-mode h1 {
-    color: #ffffff; /* Cor do título em modo escuro */
+    color: #ffffff; 
   }
   
   .dark-mode input {
-    background-color: #333; /* Cor de fundo do input em modo escuro */
-    color: white; /* Cor do texto no input */
+    background-color: #333; 
+    color: white; 
   }
   
   .dark-mode button {
-    background-color: #333; /* Cor de fundo do botão em modo escuro */
-    color: white; /* Cor do texto no botão */
+    background-color: #333; 
+    color: white; 
   }
   
   .dark-mode .movie-card {
-    background-color: #333; /* Cor de fundo dos cards dos filmes em modo escuro */
-    color: white; /* Cor do texto nos cards dos filmes */
+    background-color: #333; 
+    color: white; 
   }
   
-  /* Adicionando cores ao texto nos cards */
+  
   .dark-mode .movie-card h3 {
-    color: white; /* Cor do título do filme em modo escuro */
+    color: white; 
   }
   
-  /* Estilo adicional para garantir que todo o fundo é escuro */
+
   .dark-mode {
-    background-color: #121212; /* Cor de fundo escura */
-    color: #ffffff; /* Cor do texto em geral */
+    background-color: #121212; 
+    color: #ffffff; 
   }
   
-  /* Para garantir que o conteúdo fica escuro */
+  
   .dark-mode section {
-    background-color: #121212; /* Cor de fundo da seção que contém os filmes */
+    background-color: #121212; 
   }
   
-  /* Modo escuro: muda a cor dos ícones */
+  
   .dark-mode #closeBtn,
   .dark-mode #searchIcon,
   .dark-mode #searchBtn {
-      color: #f1c40f; /* Cor dos ícones no modo escuro */
+      color: #f1c40f; 
   }
   
   .dark-mode .search-input {
-      background-color: #333; /* Cor de fundo do campo de texto em modo escuro */
-      color: #fff; /* Cor do texto no campo de texto */
+      background-color: #333; 
+      color: #fff; 
   }
   
   .dark-mode .search-input::placeholder {
-      color: #aaa; /* Cor do placeholder em modo escuro */
+      color: #aaa; 
   }
 
   .dark-mode a {
@@ -113,9 +113,13 @@
     color: #ddd;
   }
 
+  .dark-mode #movieDetails h1 {
+    color: #ffffff;
+  }
 
 
-/* Barra de Pesquisa Oculta Inicialmente */
+
+/* Seach Bar Styles */
 .search-input {
   width: 0;
   opacity: 0;
@@ -123,7 +127,7 @@
   font-size: 16px;
   border-radius: 25px;
   border: 1px solid #ccc;
-  transition: width 0.4s ease, opacity 0.4s ease; /* Transição suave */
+  transition: width 0.4s ease, opacity 0.4s ease; 
 }
 
 .search-input.expanded {
@@ -134,11 +138,4 @@
 #searchIcon {
   color: #676767;
   cursor: pointer;
-}
-
-
-/* Movie Details Styles in dark mode */
-
-.dark-mode #movieDetails h1 {
-    color: #ffffff;
 }

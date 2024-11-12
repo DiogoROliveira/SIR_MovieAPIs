@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         await fetchMovieRatings(movieData);
     }
 
+    // reset backdrop when body class changes (i.e. when navigating away and back).
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.attributeName === 'class') {
@@ -38,10 +39,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     function displayMovieDetails(data) {
-        // Update poster and backdrop
+        // movie poster
         document.getElementById('poster').src = `https://image.tmdb.org/t/p/original${data.poster_path}`;
         
-        // Update content structure
+        // movie details structure
         const detailsContainer = document.querySelector('.details-container');
         detailsContainer.innerHTML = `
             <h1 id="movieTitle">${data.title}</h1>
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
         `;
         
-        // Reattach event listener for trailer button
+        
         document.getElementById('watchTrailerBtn').addEventListener('click', () => fetchMovieTrailer(data.title));
     }
 
@@ -141,27 +142,27 @@ document.addEventListener('DOMContentLoaded', async function() {
         crewContainer.prepend(crewTitle);
 
 
-        // Processa o elenco para adicionar tooltips com os personagens
+        // gets first 7 cast members
         data.cast.slice(0, 7).forEach(member => {
             const castMember = document.createElement('div');
             castMember.classList.add('credit-item');
             castMember.innerText = member.name;
-            castMember.setAttribute('title', `Character: ${member.character}`); // Tooltip
+            castMember.setAttribute('title', `Character: ${member.character}`); // tooltip
             castContainer.appendChild(castMember);
         });
     
-        // Processa a equipe para adicionar tooltips com o trabalho
+        //gets directors and producers
         data.crew
             .filter(member => member.job === 'Director' || member.job === 'Producer')
             .forEach(member => {
                 const crewMember = document.createElement('div');
                 crewMember.classList.add('credit-item');
                 crewMember.innerText = member.name;
-                crewMember.setAttribute('title', `Role: ${member.job}`); // Tooltip
+                crewMember.setAttribute('title', `Role: ${member.job}`); // tooltip
                 crewContainer.appendChild(crewMember);
             });
     
-        // Adiciona as colunas ao contêiner de detalhes
+        
         const detailsContainer = document.querySelector('.details-container');
         const creditsWrapper = document.createElement('div');
         creditsWrapper.classList.add('credits-wrapper');

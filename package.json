@@ -1,0 +1,12 @@
+{
+  "name": "sir_movieapis",
+  "version": "1.0.0",
+  "description": "Create a config.js file in the src directory that has the following structure:",
+  "main": "main.js",
+  "scripts": {
+    "start": "live-server public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

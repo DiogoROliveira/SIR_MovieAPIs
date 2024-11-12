@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded",async function () {
             .slice(0, 6) 
             .forEach(movie => {
                 const moviePoster = `
-                    <a href="/public/views/movie.html?id=${movie.id}" class="movie-poster-link">
+                    <a href="/movie.html?id=${movie.id}" class="movie-poster-link">
                     <div class="movie-poster">
                         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
                     </div>
@@ -42,4 +42,5 @@ document.addEventListener("DOMContentLoaded",async function () {
     await fetchMovies('upcoming', 'upcomingMovies', popularMoviesList);
     await fetchMovies('top_rated', 'topRatedMovies');
 });
+
 

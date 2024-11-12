@@ -33,12 +33,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     
         data.results.forEach((movie, index) => {
+            // var to store index of movie positions
             const globalIndex = (data.page - 1) * data.results.length + index + 1;
             const movieItem = document.createElement('div');
             movieItem.classList.add('movie-card');
             movieItem.innerHTML = `
                 <div class="movie-poster">
-                    <a href="/public/views/movie.html?id=${movie.id}" class="movie-poster-link">
+                    <a href="/movie.html?id=${movie.id}" class="movie-poster-link">
                     <img src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="${movie.title}">
                 </div>
                 <div class="movie-info">
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
       
     function goToPage(page) {
-        window.location.href = `/public/views/toprated.html?&page=${page}`;
+        window.location.href = `/toprated.html?&page=${page}`;
     }
 
 });

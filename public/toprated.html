@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Finder</title>
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -12,17 +13,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../assets/css/darkmode.css">
-    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="./assets/css/darkmode.css">
+    <link rel="stylesheet" href="./styles/toprated.css">
     
 </head>
 <body>
-    
-    <!-- Incluindo o cabeçalho com a barra de navegação -->
+    <!-- Header Partial -->
     <div id="navbar-placeholder"></div>
 
     <script>
-        fetch('../assets/partials/header.html')
+        fetch('./assets/partials/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
@@ -31,8 +31,7 @@
             .catch(error => {
                 console.error('Error fetching header:', error);
             });
-
-        
+    
         function initializeNavbar() {
             const toggle = document.querySelector('.toggle');
             const toggleIconMoon = document.querySelector('.fas.fa-moon');
@@ -49,7 +48,7 @@
             // darkmode toggle
             toggle.addEventListener('click', function() {
                 document.body.classList.toggle('dark-mode');
-                
+
                 // store preference in localStorage
                 if (document.body.classList.contains('dark-mode')) {
                     localStorage.setItem('darkMode', 'enabled');
@@ -77,54 +76,39 @@
                 }
             });
 
+            
             searchInput.addEventListener("keydown", (e) => {
                 if(e.key === "Enter") getMovies(searchInput.value);
             });
         }
 
         function getMovies(query) {
-            window.location.href = `/public/views/search.html?query=${encodeURIComponent(query)}&page=1`;
+            window.location.href = `/search.html?query=${encodeURIComponent(query)}&page=1`;
         }
     </script>
 
-<main>
-    <!-- Mensagem de boas-vindas -->
-    <section class="container text-center my-5">
-        <h1>Welcome to Movie Finder</h1>
-        <p>Search for your favorite movies by title.</p>
-    </section>
+    <main>
 
-    <!-- Categorias ou recursos populares -->
-    <section class="container text-center mb-5">
-        <h3>Explore</h3>
+        <section class="container text-center my-5">
+            <h1>Top Rated Movies in TMDb</h1>
+        </section>
 
-        <!-- Popular Movies -->
-        <div class="category-section">
-            <span class="category-label">Popular This Week</span>
-            <div id="popularMovies" class="movie-row"></div>
-        </div>
+        <section class="container text-center mb-5">
+            <div id="topratedMovies">
 
-        <!-- Upcoming Movies -->
-        <div class="category-section">
-            <span class="category-label">Upcoming Movies</span>
-            <div id="upcomingMovies" class="movie-row"></div>
-        </div>
+            </div>
+        </section>
 
-        <!-- Top Rated Movies with View More -->
-        <div class="category-section" id="topRatedMovies-container">
-            <span class="category-label">Top Rated</span>
-            <div id="topRatedMovies" class="movie-row"></div>
-            <a href="toprated.html" class="view-more">View More →</a>
-        </div>
-    </section>
-</main>
+        <div id="pagination" class="pagination-container"></div>    
+
+    </main>
 
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="../scripts/config.js"></script>
-    <script src="../scripts/main.js"></script>
+    <script src="./scripts/config.js"></script>
+    <script src="./scripts/toprated.js"></script>
 </body>
 </html>
