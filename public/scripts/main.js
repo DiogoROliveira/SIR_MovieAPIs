@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded",async function () {
-    const TMDB_API_KEY = myconfig.MY_KEY;
+    const TMDB_API_KEY = process.env.MY_KEY;
 
     let popularMoviesList = [];
 
