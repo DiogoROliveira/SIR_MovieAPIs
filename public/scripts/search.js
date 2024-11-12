@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const movieResults = document.getElementById("movieResults");
     
-    // uncomment to use config.js for local development
-    // const TMDB_API_KEY = process.env.MY_KEY;
+    const TMDB_API_KEY = process.env.TMDB_API_KEY;
     
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');

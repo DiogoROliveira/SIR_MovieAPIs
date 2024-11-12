@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
-    // uncomment to use config.js for local development
-    /* 
-    const TMDB_API_KEY = myconfig.MY_KEY;
-    const YT_KEY = myconfig.YT_KEY;
-    const RAPID_API_KEY = myconfig.RATING_KEY;
-    */
+    const TMDB_API_KEY = process.env.TMDB_API_KEY;
+    const YT_KEY = process.env.YT_KEY;
+    const RAPID_API_KEY = process.env.RAPID_API_KEY;
+    
     
     let currentBackdropPath = null;
 
