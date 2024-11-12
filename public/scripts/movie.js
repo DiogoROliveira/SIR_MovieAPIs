@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', async function() {
-    const TMDB_API_KEY = process.env.MY_KEY;
-    const YT_KEY = process.env.YT_KEY;
-    const RAPID_API_KEY = process.env.RATING_KEY;
+    
+    // uncomment to use config.js for local development
+    /* 
+    const TMDB_API_KEY = myconfig.MY_KEY;
+    const YT_KEY = myconfig.YT_KEY;
+    const RAPID_API_KEY = myconfig.RATING_KEY;
+    */
+    
     let currentBackdropPath = null;
 
     const movieId = new URLSearchParams(window.location.search).get('id');

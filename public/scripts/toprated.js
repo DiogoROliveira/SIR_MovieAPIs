@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
-    const TMDB_API_KEY = process.env.MY_KEY;
+    // uncomment to use config.js for local development
+    // const TMDB_API_KEY = process.env.MY_KEY;
+
+
+
     const urlParams = new URLSearchParams(window.location.search);
     const currentPage = parseInt(urlParams.get('page')) || 1;
 
