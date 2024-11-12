@@ -1,2 +1,4 @@
 config.js
-.vscode
+/.vscode
+.env
+/node_modules

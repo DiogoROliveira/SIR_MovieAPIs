@@ -1,14 +1,24 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded",async function() {
 
     const movieResults = document.getElementById("movieResults");
     
-    const TMDB_API_KEY = process.env.TMDB_API_KEY;
+    let TMDB_API_KEY = null;
+
+    
+    async function getConfig() {
+        const response = await fetch(`https://sir-movieapis.onrender.com/config`);
+        const config = await response.json();
+
+        TMDB_API_KEY = config.TMDB_API_KEY;
+    }
+
+    await getConfig();
     
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');
     const currentPage = parseInt(urlParams.get('page')) || 1;
     if (query) {
-        getMovies(query, currentPage);
+        await getMovies(query, currentPage);
     }
 
     function showMovies(data, query) {
@@ -145,15 +155,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    function getMovies(query, page = 1) {
+    async function getMovies(query, page = 1) {
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${query}&page=${page}`;
     
-        fetch(url)
+        try {
+            await fetch(url)
             .then((response) => response.json())
             .then((data) => { 
                 showMovies(data, query);
             })
             .catch((error) => { console.log("Error fetching data: ", error); });
+        } catch (error) {
+            console.error(error);
+        }
     }
         
 

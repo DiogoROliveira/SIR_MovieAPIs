@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
-    const TMDB_API_KEY = process.env.TMDB_API_KEY;
+    let TMDB_API_KEY = null;
+
+    async function getConfig() {
+        const response = await fetch('https://sir-movieapis.onrender.com/config');
+        const config = await response.json();
+
+        TMDB_API_KEY = config.TMDB_API_KEY;
+    }
+
+    await getConfig();
+
 
     const urlParams = new URLSearchParams(window.location.search);
     const currentPage = parseInt(urlParams.get('page')) || 1;

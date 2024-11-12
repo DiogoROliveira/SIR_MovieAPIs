@@ -1,15 +1,24 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
-    const TMDB_API_KEY = process.env.TMDB_API_KEY;
-    const YT_KEY = process.env.YT_KEY;
-    const RAPID_API_KEY = process.env.RAPID_API_KEY;
+    let TMDB_API_KEY = null;
+    let YT_KEY = null;
+    let RAPID_API_KEY = null;
     
+    async function getConfig() {
+        const response = await fetch('https://sir-movieapis.onrender.com/config');
+        const config = await response.json();
+
+        TMDB_API_KEY = config.TMDB_API_KEY;
+        YT_KEY = config.YT_KEY;
+        RAPID_API_KEY = config.RAPID_API_KEY;
+    }
     
     let currentBackdropPath = null;
 
     const movieId = new URLSearchParams(window.location.search).get('id');
 
     if (movieId) {
+        await getConfig();
         const movieData = await fetchMovieDetails(movieId);
         currentBackdropPath = movieData.backdrop_path;
         updateBackdrop(currentBackdropPath);
