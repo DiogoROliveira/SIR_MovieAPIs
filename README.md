@@ -115,6 +115,6 @@ Execute o servidor localmente com o comando:
   npm start
 ```
 
-## Licencia 📝
+## Licença 📝
 
 [MIT](LICENSE) (c) 2024 Movie Finder App
